@@ -14,7 +14,7 @@
     });
     console.log(id);
     try {
-      const response = await fetch('http://localhost:8000/dealershipcars', {
+      const response = await fetch('https://car-viewer-ochre.vercel.app/dealershipcars', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

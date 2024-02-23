@@ -20,7 +20,7 @@
     });
     console.log(id);
     try {
-      const response = await fetch('http://localhost:8000/myvehicles',{
+      const response = await fetch('https://car-viewer-ochre.vercel.app/myvehicles',{
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

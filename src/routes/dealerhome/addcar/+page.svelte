@@ -24,7 +24,7 @@
     event.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:8000/addcars', {
+      const response = await fetch('https://car-viewer-ochre.vercel.app/addcars', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

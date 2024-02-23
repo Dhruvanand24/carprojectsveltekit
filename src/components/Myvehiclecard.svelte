@@ -13,7 +13,7 @@
   onMount(async () => {
     try {
       // Fetch data from "soldvehicles" using the vehicle_id
-      const response = await fetch('http://localhost:8000/soldvehiclesdata', {
+      const response = await fetch('https://car-viewer-ochre.vercel.app/soldvehiclesdata', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -29,7 +29,7 @@
         console.log("vehicle is:",vehicle);
 
         // Now, fetch car details using the car_id from the fetched vehicle data
-        const carResponse = await fetch('http://localhost:8000/getcardetails', {
+        const carResponse = await fetch('https://car-viewer-ochre.vercel.app/getcardetails', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

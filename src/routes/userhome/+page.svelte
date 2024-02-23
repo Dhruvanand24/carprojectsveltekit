@@ -18,7 +18,7 @@
     }
     onMount(async () => {
     try {
-      const response = await fetch('http://localhost:8000/alldeals');
+      const response = await fetch('https://car-viewer-ochre.vercel.app/alldeals');
 
       if (response.ok) {
         deals = await response.json();
@@ -33,7 +33,7 @@
       console.error('Error during fetch:', error);
     }
     try {
-      const response = await fetch('http://localhost:8000/alldealerships');
+      const response = await fetch('https://car-viewer-ochre.vercel.app/alldealerships');
       
       if (response.ok) {
         dealerships = await response.json();

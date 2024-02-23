@@ -22,7 +22,7 @@
     });
 
     try {
-      const response = await fetch('http://localhost:8000/getcardetails', {
+      const response = await fetch('https://car-viewer-ochre.vercel.app/getcardetails', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -47,7 +47,7 @@
   
   async function addDeal() {
     try {
-      const response = await fetch('http://localhost:8000/adddeals', {
+      const response = await fetch('https://car-viewer-ochre.vercel.app/adddeals', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

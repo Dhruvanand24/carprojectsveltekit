@@ -10,7 +10,7 @@
   const handlebuy = async() => {
     
     try {
-      const response = await fetch('http://localhost:8000/addsoldvehicle', {
+      const response = await fetch('https://car-viewer-ochre.vercel.app/addsoldvehicle', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -45,7 +45,7 @@
     });
     console.log(id);
     try {
-      const response = await fetch('http://localhost:8000/getcardetails', {
+      const response = await fetch('https://car-viewer-ochre.vercel.app/getcardetails', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

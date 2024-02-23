@@ -15,7 +15,7 @@
     onMount(async() => {
     
         try {
-        const response = await fetch('http://localhost:8000/getcardetails', {
+        const response = await fetch('https://car-viewer-ochre.vercel.app/getcardetails', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -44,7 +44,7 @@
     const handleSubmit = async (event) => {
       event.preventDefault();
       try {
-      const response = await fetch('http://localhost:8000/updatecars', {
+      const response = await fetch('https://car-viewer-ochre.vercel.app/updatecars', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
