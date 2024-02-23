@@ -1,7 +1,14 @@
 <script>
-    import { onMount, createEventDispatcher } from 'svelte';
   
-    let user_email = '';
+    import { onMount, createEventDispatcher } from 'svelte';
+    import { goto } from '$app/navigation';
+    import { dealerStore, resetDealerStore } from '../stores/dealerstore';
+	  
+
+
+   
+
+    let dealership_email = '';
     let password = '';
     let showPassword = false;
     const dispatch = createEventDispatcher();
@@ -11,40 +18,57 @@
     const handleclick = () => {
        dispatch("flip", "dealersignup");
     }
-
-
     const login = async () => {
-      try {
-        const response = await fetch('/login', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            user_email,
-            password,
-          }),
+    try {
+      const response = await fetch('http://localhost:8000/dealerlogin', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          dealership_email,
+          password,
+        }),
+      });
+
+      if (response.ok) {
+        const userInfo = {
+          // You may customize this based on the actual user information you receive
+          email: dealership_email,
+          // Add other user details as needed
+        };
+
+        // Save user info to the session store
+        
+
+        // Redirect to "/userhome" on successful login
+        const data = await response.json();
+        console.log(data);
+        dealerStore.set({
+          dealership_email: data.dealership_email,
+          id: data.dealership_id,
         });
-  
-        if (response.ok) {
-          console.log('Login successful');
-          // Handle success, such as redirecting the user or updating the UI
-        } else {
-          console.error('Login failed:', response.statusText);
-          // Handle errors, such as displaying an error message to the user
-        }
-      } catch (error) {
-        console.error('Error during login:', error);
-        // Handle unexpected errors
+        alert("login successfull");
+        
+        goto('/dealerhome');
+      } else {
+        console.error('Login failed:', response.statusText);
+        // Handle errors, such as displaying an error message to the user
       }
-    };
-  
+    } catch (error) {
+      console.error('Error during login:', error);
+      // Handle unexpected errors
+    }
+  };
+
+   
     const togglePasswordVisibility = () => {
       showPassword = !showPassword;
     };
   
     onMount(() => {
       // Additional initialization code can be added here
+      resetDealerStore();
     });
   </script>
   
@@ -60,7 +84,7 @@
     <h2 class="text-4xl text-white font-bold mb-4">Dealer Login</h2>
     <form class="flex flex-col" on:submit|preventDefault={login}>
       <label for="user_email" class="text-white">Email:</label>
-      <input type="email" placeholder="enter email" id="user_email" class="input bg-white input-bordered w-full max-w-xs" bind:value={user_email} required />
+      <input type="email" placeholder="enter email" id="user_email" class="input bg-white input-bordered w-full max-w-xs" bind:value={dealership_email} required />
       
   
       <label for="password" class="text-white">Password:</label>

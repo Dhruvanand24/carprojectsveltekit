@@ -23,6 +23,7 @@
 
       if (response.ok) {
         console.log('Signup successful');
+        alert("Signup successful");
         // Handle success, such as redirecting the user or updating the UI
       } else {
         console.error('Signup failed:', response.statusText);

@@ -1,5 +1,6 @@
 <script>
     import { onMount, createEventDispatcher } from 'svelte';
+    import { goto } from '$app/navigation';
     
   
     let dealership_email = '';
@@ -31,6 +32,7 @@
 
       if (response.ok) {
         console.log('Signup successful');
+        alert("Signup successful");
         // Handle success, such as redirecting the user or updating the UI
       } else {
         console.error('Signup failed:', response.statusText);

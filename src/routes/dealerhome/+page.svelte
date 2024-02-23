@@ -2,20 +2,14 @@
     import Card from "../../components/Carddealer.svelte";
     import {goto} from '$app/navigation';
     const handlegoto = ()=>{
-        goto('/dealerhome/addcar')
+        goto('/dealerhome/addcar');
     }
     const handlesold = ()=>{
         goto('/dealerhome/soldvehicles')
     }
-    let isSidebarOpen = false;
+    
   
-    function openNav() {
-      isSidebarOpen = true;
-    }
-  
-    function closeNav() {
-      isSidebarOpen = false;
-    }
+    
   </script>
   
   <style>
@@ -25,7 +19,7 @@
   <div class="h-screen w-full relative bg-gray-200">
 
   
-    <div class="flex flex-col ml-0 transition-all duration-500" style="margin-left: {isSidebarOpen ? '250px' : '0'}">
+    <div class="flex flex-col ml-0 transition-all duration-500">
       
        <div class="flex flex-col flex-1 items-center p-4 bg-gray-200">
         <h1 class="text-black font-bold text-4xl">
