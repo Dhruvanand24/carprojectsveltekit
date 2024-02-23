@@ -52,6 +52,7 @@
         
         goto('/dealerhome');
       } else {
+        alert("Login Failed");
         console.error('Login failed:', response.statusText);
         // Handle errors, such as displaying an error message to the user
       }

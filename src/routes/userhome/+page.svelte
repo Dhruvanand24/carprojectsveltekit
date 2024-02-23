@@ -140,7 +140,7 @@
             
           {#each finaldata as deal (deal._id)}
           <!-- Use the car data here to display the cards -->
-          <Card id={deal.car_id} />
+          <Card id={deal.car_id} deal_info={deal.deal_info} />
         {/each}
            
         </div>

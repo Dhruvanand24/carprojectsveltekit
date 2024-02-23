@@ -33,7 +33,7 @@
           type,
           name,
           model,
-          car_info: { imageurl }, // Modify this based on your backend structure
+          car_info: { imageurl, dealership_id: id }, // Modify this based on your backend structure
           dealership_id: id,
         }),
       });

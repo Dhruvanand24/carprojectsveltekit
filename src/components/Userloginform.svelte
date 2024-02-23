@@ -49,6 +49,7 @@
         goto('/userhome');
       } else {
         console.error('Login failed:', response.statusText);
+        alert("Login Failed");
         // Handle errors, such as displaying an error message to the user
       }
     } catch (error) {

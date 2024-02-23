@@ -24,7 +24,7 @@
         });
   
         if (response.ok) {
-          console.log('Login successful');
+          console.log('password changed successfully');
           // Handle success, such as redirecting the user or updating the UI
         } else {
           console.error('Login failed:', response.statusText);
