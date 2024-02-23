@@ -75,7 +75,7 @@
 </script>
 
 <div class="card card-compact w-96 bg-base-100 shadow-xl">
-  <figure><img class="object-fill h-52 w-full" src={car?.car_info?.imageurl} alt="Shoes" /></figure>
+  <figure><img class="object-fill h-52 w-full" src={car?.car_info?.imageurl} alt="carimage" /></figure>
   <div class="card-body">
     <h2 class="card-title">{car?.name}!</h2>
     
