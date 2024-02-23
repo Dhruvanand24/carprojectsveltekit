@@ -1,9 +1,9 @@
-import { writable } from 'svelte/store';
+import { writable } from "svelte/store";
 
 // Initial values for the store
 const initialUserData = {
-  user_email: '',
-  id: '',
+  user_email: "",
+  id: "",
 };
 
 // Create a writable store with the initial values

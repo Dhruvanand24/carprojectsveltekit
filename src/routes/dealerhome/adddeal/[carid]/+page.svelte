@@ -1,18 +1,16 @@
 <script>
-  import {dealerStore}  from '../../../../stores/dealerstore.js'; // Replace with the correct path to your dealer store
-  import { onMount } from 'svelte';
-  import {page} from '$app/stores'
-  const car_id = $page.params.carid 
+  import { dealerStore } from "../../../../stores/dealerstore.js"; 
+  import { onMount } from "svelte";
+  import { page } from "$app/stores";
+  const car_id = $page.params.carid;
 
-  
-  let price = ''
-  let traveled = '';
+  let price = "";
+  let traveled = "";
   let dealership_email;
   let id;
 
-
   onMount(() => {
-    const unsubscribe = dealerStore.subscribe(value => {
+    const unsubscribe = dealerStore.subscribe((value) => {
       dealership_email = value.dealership_email;
       id = value.id;
     });
@@ -24,47 +22,67 @@
     event.preventDefault();
 
     try {
-      const response = await fetch('https://car-viewer-ochre.vercel.app/adddeals', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          car_id: car_id,
-          
-        
-          deal_info: { price, traveled, dealership_id: id  },
-          dealership_id: id
-          // Modify this based on your backend structure
-          
-        }),
-      });
+      const response = await fetch(
+        "https://car-viewer-ochre.vercel.app/adddeals",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            car_id: car_id,
+
+            deal_info: { price, traveled, dealership_id: id },
+            dealership_id: id,
+           
+          }),
+        }
+      );
 
       if (response.ok) {
         const data = await response.json();
         console.log(data.message);
-        alert('deal added successfully');
+        alert("deal added successfully");
       } else {
-        console.error('Failed to add car:', response.statusText);
+        console.error("Failed to add car:", response.statusText);
       }
     } catch (error) {
-      console.error('Error adding car:', error);
+      console.error("Error adding car:", error);
     }
   };
 </script>
 
 <main class="min-h-screen flex items-center justify-center w-full p-8">
-  <form on:submit={handleSubmit} class="max-w-md p-4 rounded-md shadow-md bg-gray-900">
-    <label for="Price" class="block mb-2 text-sm font-semibold text-gray-600">Price:</label>
-<input type="number" id="name" bind:value={price} class="w-full p-2 border rounded-md " required />
+  <form
+    on:submit={handleSubmit}
+    class="max-w-md p-4 rounded-md shadow-md bg-gray-900"
+  >
+    <label for="Price" class="block mb-2 text-sm font-semibold text-gray-600"
+      >Price:</label
+    >
+    <input
+      type="number"
+      id="name"
+      bind:value={price}
+      class="w-full p-2 border rounded-md"
+      required
+    />
 
-<label for="travelled" class="block mt-4 mb-2 text-sm font-semibold text-gray-600">Travelled:</label>
-<input type="number" id="model" bind:value={traveled} class="w-full p-2 border rounded-md" required />
+    <label
+      for="travelled"
+      class="block mt-4 mb-2 text-sm font-semibold text-gray-600"
+      >Travelled:</label
+    >
+    <input
+      type="number"
+      id="model"
+      bind:value={traveled}
+      class="w-full p-2 border rounded-md"
+      required
+    />
 
-
-
-
-    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md">Add Deal</button>
+    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md"
+      >Add Deal</button
+    >
   </form>
 </main>
-
