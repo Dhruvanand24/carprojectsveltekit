@@ -18,23 +18,23 @@
     <div class="flex flex-col p-8 h-[80vh] shadow-md w-[80vw] lg:w-[60vw] bg-white rounded-xl">
       <div class="flex mb-2">
         <div
-          class="p-2 w-1/4 bg-red-400 rounded-lg"
+          class="p-2 w-1/4 bg-[#e52165] select-none cursor-pointer transition-all duration-200 ease-linear z-10 rounded-lg hover:p-4"
           on:click={() => (selectedOption = 'user'||'usersignup')}
         >
-          <h1 class="text-white font-bold ml-4 text-xl select-none cursor-pointer">
+          <h1 class="text-white font-bold ml-4 text-xl ">
             User
           </h1>
         </div>
         <div
-          class="p-2 w-1/4 bg-slate-300 rounded-lg ml-1"
+          class="p-2 w-1/4 bg-[#0d1137] rounded-lg ml-1 select-none cursor-pointer transition-all duration-200 ease-linear z-10 rounded-lg hover:p-4"
           on:click={() => (selectedOption = 'dealer'|| 'dealersignup')}
         >
-          <h1 class="font-bold text-xl select-none cursor-pointer ml-4 text-red-500">
+          <h1 class="font-bold text-xl ml-4 text-white">
             Dealer
           </h1>
         </div>
       </div>
-      <div class={`flex flex-col h-full ${selectedOption === 'user' ? 'bg-red-400' : 'bg-slate-300'} rounded-xl`}>
+      <div class={`flex transition-all duration-300 ease-linear flex-col h-full ${selectedOption === 'user' ? 'bg-[#e52165]' : 'bg-[#0d1137]'} rounded-xl`}>
         {#if selectedOption === 'user'}
           <UserLoginForm on:flip={handleflip} on:forgot={handleflip}/>
         {:else if selectedOption === 'dealer' }

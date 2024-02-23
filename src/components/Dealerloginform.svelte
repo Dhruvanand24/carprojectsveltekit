@@ -112,11 +112,11 @@
   <div class="flex justify-center">
       <button class="btn mt-2" type="submit">Login</button></div>
     </form>
-    <p class="select-none cursor-pointer text-black" on:click={handleforgot}>
+    <p class="select-none cursor-pointer text-white" on:click={handleforgot}>
         Forgot Password?
       </p>
-    <p class="text-white">
-      Don't have an account? <span on:click={handleclick} class="text-black font-bold cursor-pointer select-none">Sign Up</span>
+    <p class="text-slate-400">
+      Don't have an account? <span on:click={handleclick} class="text-white font-bold cursor-pointer select-none">Sign Up</span>
     </p>
   
   

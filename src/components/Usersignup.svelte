@@ -52,7 +52,7 @@
   }
 </style>
 
-<main class="flex flex-col items-center h-full gap-4 p-4 bg-red-400 rounded-xl">
+<main class="flex flex-col items-center h-full gap-4 p-4 bg-[#e52165] rounded-xl">
   <h2 class="text-4xl text-white font-bold mb-4">User Signup</h2>
   <form class="flex flex-col" on:submit|preventDefault={handleSignup}>
     <label for="user_email" class="text-white">Email:</label>
