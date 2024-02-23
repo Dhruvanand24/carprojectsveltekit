@@ -1,7 +1,13 @@
 <script>
     import Card from "../../components/Card.svelte";
+    import { onMount } from 'svelte';
+  import Listitem from "../../components/Listitem.svelte";
     
     let isSidebarOpen = false;
+  let deals = [];
+  let dealerships = [];
+  let finaldata = [];
+  let filtername = [];
   
     function openNav() {
       isSidebarOpen = true;
@@ -10,6 +16,42 @@
     function closeNav() {
       isSidebarOpen = false;
     }
+    onMount(async () => {
+    try {
+      const response = await fetch('http://localhost:8000/alldeals');
+
+      if (response.ok) {
+        deals = await response.json();
+        finaldata = deals;
+        filtername = [...new Set(deals.map(deal => deal.car_id))];
+        
+       
+      } else {
+        console.error('Failed to fetch dealership cars:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error during fetch:', error);
+    }
+    try {
+      const response = await fetch('http://localhost:8000/alldealerships');
+      
+      if (response.ok) {
+        dealerships = await response.json();
+      } else {
+        console.error('Failed to fetch dealership cars:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error during fetch:', error);
+    }
+    
+  });
+  const handledealershipselection = (selectedDeals) => {
+    // Filter deals based on selectedDeals
+    finaldata = deals.filter(deal => selectedDeals.includes(deal._id));
+  }
+  const handleall = () => {
+    finaldata = deals;
+  }
   </script>
   
   <style>
@@ -26,7 +68,7 @@
       padding-top: 60px;
     }
   
-    .sidebar a {
+    .sidebar p {
       padding: 8px 8px 8px 32px;
       text-decoration: none;
       font-size: 25px;
@@ -35,7 +77,7 @@
       transition: 0.3s;
     }
   
-    .sidebar a:hover {
+    .sidebar p:hover {
       color: #f1f1f1;
     }
   
@@ -71,10 +113,12 @@
       style="width: {isSidebarOpen ? '250px' : '0'}"
     >
       <a href="javascript:void(0)" class="closebtn" on:click={closeNav}>×</a>
-      <a href="#">About</a>
-      <a href="#">Services</a>
-      <a href="#">Clients</a>
-      <a href="#">Contact</a>
+      <p class="select-none cursor-pointer" on:click={handleall}>All Deals</p>
+      {#each dealerships as dealership (dealership?._id)}
+          <!-- Use the car data here to display the cards -->
+          <p class="select-none cursor-pointer" on:click={()=>handledealershipselection(dealership.deals)}>{dealership?.dealership_name}</p>
+        {/each}
+     
     </div>
   
     <div class="flex flex-col ml-0 transition-all duration-500" style="margin-left: {isSidebarOpen ? '250px' : '0'}">
@@ -87,23 +131,18 @@
         <details class="dropdown">
             <summary class="m-1 btn">Filter by name</summary>
             <ul class="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
-              <li><a>Item 1</a></li>
-              <li><a>Item 2</a></li>
+              {#each filtername as filter (filter)}
+              <Listitem car_id={filter}/>
+              {/each}
             </ul>
           </details></div>
         <div class="flex flex-wrap gap-4 mt-2 justify-center">
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-
+            
+          {#each finaldata as deal (deal._id)}
+          <!-- Use the car data here to display the cards -->
+          <Card id={deal.car_id} />
+        {/each}
+           
         </div>
        </div>
       

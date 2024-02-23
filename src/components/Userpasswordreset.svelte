@@ -12,7 +12,7 @@
 
     const login = async () => {
       try {
-        const response = await fetch('/login', {
+        const response = await fetch('http://localhost:8000/changeuserpassword', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
