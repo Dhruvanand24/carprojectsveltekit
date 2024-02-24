@@ -8,6 +8,7 @@
   let dealerships = [];
   let finaldata = [];
   let filtername = [];
+  let uniqueNames = [];
 
   function openNav() {
     isSidebarOpen = true;
@@ -16,6 +17,7 @@
   function closeNav() {
     isSidebarOpen = false;
   }
+  
   onMount(async () => {
     try {
       const response = await fetch(
@@ -45,6 +47,35 @@
     } catch (error) {
       console.error("Error during fetch:", error);
     }
+    const namePromises = filtername.map(async (carId) => {
+      const response = await fetch('https://car-viewer-ochre.vercel.app/getcardetails', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          car_id: carId,
+        }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        return { id: data._id, name: data.name };
+      } else {
+        console.error('Failed to retrieve car name for id', carId, response.statusText);
+        return null; // Handle the error as needed
+      }
+    });
+
+    // Wait for all name promises to resolve
+    const names = await Promise.all(namePromises);
+
+    // Filter out null values and get unique names
+    const uniqueNamesMap = new Map();
+    names.filter(entry => entry !== null).forEach(entry => {
+      uniqueNamesMap.set(entry.name, entry.id);
+    });
+    uniqueNames = Array.from(uniqueNamesMap.entries()).map(([name, id]) => ({ name, id }));
   });
   const handledealershipselection = (selectedDeals) => {
     // Filter deals based on selectedDeals
@@ -86,8 +117,8 @@
           <ul
             class="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52"
           >
-            {#each filtername as filter (filter)}
-              <Listitem car_id={filter} />
+            {#each uniqueNames as { name, id } (name)}
+              <Listitem name={name} />
             {/each}
           </ul>
         </details>
